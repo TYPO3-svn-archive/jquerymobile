@@ -1,0 +1,93 @@
+/**
+ * Source: T3N Magazin, 22, Softlink 2790
+ * Author: Patrick Lobacher / info@typovision.de / 089 - 18 92 08 70
+ * Link: http://t3n.de/magazin/fileadmin/listings/t3n_listings_2790.zip
+ */
+
+# Loeschen des vorher schon definierten PAGE-Objekts
+mobile >  
+# Konfiguration der Ausgabe
+mobile.config {
+  # Wir verwenden den Doctype fuer HTML5
+  doctype = <!DOCTYPE html> 
+  xmlprologue = none
+  xhtml_cleaning = all
+  htmlTag_setParams = xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de"
+  renderCharset = utf-8
+  metaCharset < .renderCharset
+  sys_language_uid = 0
+  language = de
+  locale_all = de_DE
+  htmlTag_langKey = de
+  sendCacheHeaders = 1
+  cache_period = 43200
+  cache = 1
+  no_cache = 0
+  # Spamschutz fuer E-Mail-Adressen
+  spamProtectEmailAddresses = 2
+  spamProtectEmailAddresses_atSubst = (at)
+  meta.robots = index, follow
+  sys_language_mode = content_fallback
+  sys_language_overlay = hideNonTranslated
+  # Definieren Sie hier auch gerne realurl als Rewriter
+  simulateStaticDocuments = 1
+  simulateStaticDocuments_noTypeIfNoTitle = 1
+  linkVars = L[0-2]
+}
+
+# page object
+mobile = PAGE
+mobile.typeNum = 111
+mobile {
+  # Einbinden eines eigenen CSS fuer die mobile Ausgabe
+  includeCSS.mobile = EXT:jquerymobile/res/style.css
+  
+  # Laden der jQuery und jQuery mobile Bibliotheken sowie des jQuery mobile CSS
+  headerData.15 = HTML
+  headerData.15.value (
+	<link rel="stylesheet" href="EXT:jquerymobile/res/jquery.mobile-1.0a2/jquery.mobile-1.0a2.min.css" />
+	<script src="EXT:jquerymobile/res/jquery-1.4.3.min.js"></script>
+	<script src="EXT:jquerymobile/res/jquery.mobile-1.0a2/jquery.mobile-1.0a2.min.js"></script>
+  )
+  
+  # Die mobile Seite ist umschlossen von einem DIV mit dem Attribut data-role="page"
+  wrap = <div data-role="page" data-theme="b"> | </div> 
+
+  # Der Titel wird oben in den Header geschrieben
+  10 = TEXT
+  10.field = title
+  10.wrap = <div data-role="header"><h1>|</h1></div>
+  
+  # Jetzt beginnt der Inhaltsbereich
+  20 = HTML
+  20.value = <div data-role="content">
+  
+  # Aufbau des Navigationsmenues
+  30 = HMENU
+  30 {
+	# Da man ohnehin nur jeweils das Untermenue sieht und die Startseite selbst "Home" ist,
+	# blenden wir diese (hier die UID=2) einfach aus 
+	excludeUidList = 2
+	special = directory
+	special.value >
+	1 = TMENU
+	1.wrap = <ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="b"> | </ul>
+	1.NO = 1
+	1.NO.wrapItemAndSub = <li> | </li>
+  }
+  
+  # Hier lesen wir die Inhaltsspalte aus
+  40 = CONTENT
+  40 { 
+	table = tt_content
+	select.orderBy = sorting
+	select.where = colPos = 0
+	select.languageField = sys_language_uid
+  }
+  
+  # Am Ende noch ein Footer mit einem direkten Link zur Telefonnummer, 
+  # d.h. per Klick darauf kann direkt angerufen werden (sofern das Mobilgeraet dies unterstuetzt)
+  50 = HTML
+  50.value = </div><div data-role="footer"><h4><a href="tel:+49-89-18920870" rel="external">typovision* anrufen</a></h4></div>
+  
+}

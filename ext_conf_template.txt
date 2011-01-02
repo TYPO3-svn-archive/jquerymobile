@@ -1,0 +1,71 @@
+# cat=basic; type=int[0-999]; label= Page typeNum: Number for mobile page types '&type=123' used as GETParameter 
+page_typeNum = 111
+
+# cat=basic/file/1; type=string; xtype=file[css]; label= jQueryMobile CSS: include CSS from jQuery Mobile (theme bar,body ,btn containers). You can also use relative URL like 'http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a2.min.css'.
+file.jquery_mobile_css = EXT:jquerymobile/res/jquery.mobile-1.0a2/jquery.mobile-1.0a2.css
+
+# cat=basic/file/3; type=string; xtype=file[js]; label= jQueryMobile JS: include JavaScript from jQuery Mobile (UI widget). You can also use relative URL like 'http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js'.
+file.jquery_mobile_js = EXT:jquerymobile/res/jquery.mobile-1.0a2/jquery.mobile-1.0a2.js
+
+# cat=basic/file/5; type=string; xtype=file[js]; label= jQuery JS: include JavaScript from jQuery (?). You can also use relative URL like 'http://code.jquery.com/jquery-1.4.3.min.js'.
+file.jquery_js = EXT:jquerymobile/res/jquery-1.4.3.min.js
+
+/*
+ * PRE-CONFIGURATIONS
+ * uses the TSParser extension class to t3lib_TStemplate
+ 	// internal
+	var $categories = array(
+		'basic' => array(),		// Constants of superior importance for the template-layout. This is dimensions, imagefiles and enabling of various features. The most basic constants, which you would almost always want to configure.
+		'menu' => array(),		// Menu setup. This includes fontfiles, sizes, background images. Depending on the menutype.
+		'content' => array(),	// All constants related to the display of pagecontent elements
+		'page' => array(),		// General configuration like metatags, link targets
+		'advanced' => array(),	// Advanced functions, which are used very seldomly.
+		'all' => array()		// All constants are put here also!
+	);		// This will be filled with the available categories of the current template.
+	var $subCategories = array(
+		// Standard categories:
+		'enable' => Array('Enable features', 'a'),
+		'dims' => Array('Dimensions, widths, heights, pixels', 'b'),
+		'file' => Array('Files', 'c'),
+		'typo'	=> Array('Typography', 'd'),
+		'color' => Array('Colors', 'e'),
+		'links' => Array('Links and targets', 'f'),
+		'language' => Array('Language specific constants', 'g'),
+		
+
+		// subcategories based on the default content elements
+		'cheader' => Array('Content: \'Header\'', 'ma'),
+		'cheader_g' => Array('Content: \'Header\', Graphical', 'ma'),
+		'ctext' => Array('Content: \'Text\'', 'mb'),
+		'cimage' => Array('Content: \'Image\'', 'md'),
+		'cbullets' => Array('Content: \'Bullet list\'', 'me'),
+		'ctable' => Array('Content: \'Table\'', 'mf'),
+		'cuploads' => Array('Content: \'Filelinks\'', 'mg'),
+		'cmultimedia' => Array('Content: \'Multimedia\'', 'mh'),
+		'cmailform' => Array('Content: \'Form\'', 'mi'),
+		'csearch' => Array('Content: \'Search\'', 'mj'),
+		'clogin' => Array('Content: \'Login\'', 'mk'),
+		'csplash' => Array('Content: \'Textbox\'', 'ml'),
+		'cmenu' => Array('Content: \'Menu/Sitemap\'', 'mm'),
+		'cshortcut' => Array('Content: \'Insert records\'', 'mn'),
+		'clist' => Array('Content: \'List of records\'', 'mo'),
+		'cscript' => Array('Content: \'Script\'', 'mp'),
+		'chtml' => Array('Content: \'HTML\'', 'mq')
+	);
+	
+	types:
+		'string'	(default)
+		'text'
+		'int'		(type=int [0-600]; range; low-high, list: item,item,item = selector)
+		'int+'		('Range 0-')
+		'color'		(#FFFFFF)
+		'wrap'
+		'offset'
+		'options'	(type=options[item1,item2,item3];)
+		'boolean'	(check)
+		'comment'
+		'file'		(type=file[html,htm,tmpl,txt]; ...[IMAGE_EXT] ... file.myFile = EXT:myplugin/pi1/.. )
+		'user'
+		'small'
+		... int,options,file,boolean,offset,user -> uses parameterstrings for more configs
+ */
